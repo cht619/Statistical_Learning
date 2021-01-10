@@ -25,11 +25,13 @@ class ID3:
         def __init__(self, col, Y):
             self.col = col
             self.children = {}
+            # Calculate the total
             self.prob = Counter(Y)
             s = sum(self.prob.values())
             for y in self.prob:
                 # Standardization
                 self.prob[y] /= s
+            # calculate the largest
             label_ind, self.label_prob = argmax(self.prob.keys(), key=self.prob.__getitem__)
             self.labels = Y[label_ind]
 
@@ -73,6 +75,7 @@ class ID3:
 
     def fit(self, X, Y):
         self.column_cnt = len(X[0])
+
         self.root = self.build(X, Y, set())
 
     def _predict(self, x):

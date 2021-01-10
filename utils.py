@@ -42,7 +42,8 @@ def entropy_of_split(X, Y, col):
 
 
 def information_gain(X, Y, col):
+    # 信息增益 = 信息熵 - 条件熵
     entropy_of_X = entropy(Counter(Y).values())
     entropy_of_col = entropy_of_split(X, Y, col)
-    return entropy_of_X / (entropy_of_col + 1e-10)
+    return entropy_of_X - entropy_of_col
 
